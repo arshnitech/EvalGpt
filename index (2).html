@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>EvalGpt | AI Answer Script Evaluation for Schools and Colleges</title>
+  <meta
+    name="description"
+    content="EvalGpt helps schools, colleges, and academic institutions evaluate answer scripts faster with rubric-based AI scoring, OCR, and report generation."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #f3f7ff;
+      --ink: #0d1728;
+      --muted: #58657a;
+      --panel: rgba(255, 255, 255, 0.78);
+      --panel-strong: #ffffff;
+      --line: rgba(13, 23, 40, 0.08);
+      --brand: #1f6bff;
+      --brand-deep: #0f3fa8;
+      --brand-soft: #d8e6ff;
+      --mint: #d7fff0;
+      --gold: #ffd978;
+      --lavender: #ece2ff;
+      --shadow: 0 22px 60px rgba(31, 57, 122, 0.14);
+      --radius-xl: 32px;
+      --radius-lg: 24px;
+      --radius-md: 18px;
+      --max-width: 1200px;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Manrope", sans-serif;
+      color: var(--ink);
+      background:
+        radial-gradient(circle at 0% 0%, rgba(75, 143, 255, 0.14), transparent 28%),
+        radial-gradient(circle at 100% 20%, rgba(40, 204, 151, 0.16), transparent 20%),
+        linear-gradient(180deg, #f7fbff 0%, #eef4ff 100%);
+      line-height: 1.5;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img,
+    svg {
+      display: block;
+      max-width: 100%;
+    }
+
+    .shell {
+      width: min(var(--max-width), calc(100% - 28px));
+      margin: 0 auto;
+    }
+
+    .page-orb,
+    .page-orb-secondary {
+      position: fixed;
+      inset: auto;
+      pointer-events: none;
+      z-index: -1;
+      border-radius: 50%;
+      filter: blur(24px);
+      opacity: 0.6;
+    }
+
+    .page-orb {
+      top: 90px;
+      left: -110px;
+      width: 260px;
+      height: 260px;
+      background: radial-gradient(circle, rgba(31, 107, 255, 0.26), transparent 65%);
+    }
+
+    .page-orb-secondary {
+      right: -80px;
+      top: 360px;
+      width: 220px;
+      height: 220px;
+      background: radial-gradient(circle, rgba(50, 215, 173, 0.24), transparent 65%);
+    }
+
+    .eyebrow,
+    .micro {
+      font-size: 0.76rem;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--brand-deep);
+    }
+
+    .topbar {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid rgba(13, 23, 40, 0.06);
+      background: rgba(247, 251, 255, 0.74);
+      backdrop-filter: blur(14px);
+    }
+
+    .nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 0;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-badge {
+      width: 46px;
+      height: 46px;
+      border-radius: 16px;
+      display: grid;
+      place-items: center;
+      font-family: "Sora", sans-serif;
+      font-weight: 800;
+      color: #fff;
+      background: linear-gradient(135deg, #2b7cff 0%, #1b49c7 100%);
+      box-shadow: 0 16px 32px rgba(31, 107, 255, 0.26);
+    }
+
+    .brand-copy {
+      font-family: "Sora", sans-serif;
+      font-weight: 700;
+      letter-spacing: -0.03em;
+    }
+
+    .brand-copy span {
+      display: block;
+      font-family: "Manrope", sans-serif;
+      font-size: 0.84rem;
+      font-weight: 700;
+      color: var(--muted);
+      letter-spacing: 0.01em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 22px;
+      align-items: center;
+      color: var(--muted);
+      font-weight: 700;
+    }
+
+    .nav-links a:hover {
+      color: var(--ink);
+    }
+
+    .button,
+    .button-alt {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 14px 22px;
+      border-radius: 999px;
+      font-weight: 800;
+      transition: transform 180ms ease, box-shadow 180ms ease, background 180ms ease;
+    }
+
+    .button {
+      color: #fff;
+      background: linear-gradient(135deg, #2b7cff 0%, #1247bf 100%);
+      box-shadow: 0 20px 34px rgba(28, 86, 218, 0.24);
+    }
+
+    .button-alt {
+      border: 1px solid rgba(13, 23, 40, 0.08);
+      background: rgba(255, 255, 255, 0.8);
+      color: var(--ink);
+    }
+
+    .button:hover,
+    .button-alt:hover {
+      transform: translateY(-2px);
+    }
+
+    .hero {
+      padding: 38px 0 42px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.08fr 0.92fr;
+      gap: 22px;
+      align-items: stretch;
+    }
+
+    .hero-copy,
+    .hero-visual,
+    .panel,
+    .feature-card,
+    .highlight,
+    .cta-block {
+      background: var(--panel);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      backdrop-filter: blur(18px);
+    }
+
+    .hero-copy {
+      position: relative;
+      overflow: hidden;
+      padding: 40px;
+      border-radius: 36px;
+      background:
+        radial-gradient(circle at top left, rgba(100, 157, 255, 0.22), transparent 26%),
+        radial-gradient(circle at bottom right, rgba(155, 255, 227, 0.18), transparent 25%),
+        rgba(255, 255, 255, 0.8);
+      isolation: isolate;
+    }
+
+    .hero-copy::before {
+      content: "";
+      position: absolute;
+      right: -70px;
+      bottom: -90px;
+      width: 260px;
+      height: 260px;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(31, 107, 255, 0.14), transparent 62%);
+      z-index: -1;
+    }
+
+    h1,
+    h2,
+    h3,
+    h4 {
+      margin: 0;
+      font-family: "Sora", sans-serif;
+      letter-spacing: -0.04em;
+    }
+
+    h1 {
+      font-size: clamp(2.8rem, 6vw, 5.6rem);
+      line-height: 0.95;
+      max-width: 10.5ch;
+      margin-top: 10px;
+    }
+
+    h2 {
+      font-size: clamp(2rem, 4vw, 3.4rem);
+      line-height: 1;
+    }
+
+    .hero-copy p {
+      max-width: 60ch;
+      margin: 18px 0 0;
+      font-size: 1.08rem;
+      color: var(--muted);
+    }
+
+    .hero-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+
+    .hero-proof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+
+    .hero-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: rgba(255, 255, 255, 0.78);
+      border: 1px solid rgba(13, 23, 40, 0.06);
+      color: var(--muted);
+      font-size: 0.92rem;
+      font-weight: 700;
+    }
+
+    .hero-pill::before {
+      content: "";
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--brand) 0%, #32d7ad 100%);
+    }
+
+    .hero-meta {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .meta-card {
+      padding: 14px 16px;
+      border-radius: 20px;
+      background: rgba(255, 255, 255, 0.68);
+      border: 1px solid rgba(13, 23, 40, 0.06);
+    }
+
+    .meta-card strong {
+      display: block;
+      margin-bottom: 4px;
+      font-size: 1rem;
+    }
+
+    .meta-card span {
+      color: var(--muted);
+      font-size: 0.92rem;
+    }
+
+    .hero-visual {
+      border-radius: 36px;
+      padding: 20px;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+      gap: 16px;
+      background:
+        linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(236, 243, 255, 0.9));
+    }
+
+    .domain-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      padding: 10px 14px;
+      border-radius: 999px;
+      background: #eef4ff;
+      border: 1px solid rgba(31, 107, 255, 0.12);
+      color: var(--brand-deep);
+      font-weight: 800;
+    }
+
+    .dashboard {
+      position: relative;
+      min-height: 420px;
+      border-radius: 28px;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top right, rgba(31, 107, 255, 0.18), transparent 22%),
+        linear-gradient(160deg, #f8fbff 0%, #dfeaff 100%);
+      border: 1px solid rgba(31, 107, 255, 0.08);
+    }
+
+    .floating-badge {
+      position: absolute;
+      z-index: 2;
+      padding: 10px 12px;
+      border-radius: 16px;
+      background: rgba(255, 255, 255, 0.92);
+      border: 1px solid rgba(13, 23, 40, 0.06);
+      box-shadow: 0 14px 34px rgba(31, 57, 122, 0.12);
+      font-size: 0.9rem;
+      font-weight: 800;
+      color: var(--ink);
+      animation: floatCard 5.6s ease-in-out infinite;
+    }
+
+    .badge-top {
+      top: 18px;
+      right: 18px;
+    }
+
+    .badge-bottom {
+      left: 18px;
+      bottom: 18px;
+    }
+
+    .section {
+      padding: 34px 0;
+    }
+
+    .showcase-strip {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr 0.8fr;
+      gap: 14px;
+      margin-top: 18px;
+    }
+
+    .showcase-card {
+      position: relative;
+      overflow: hidden;
+      min-height: 180px;
+      padding: 22px;
+      border-radius: 26px;
+      background: linear-gradient(180deg, rgba(255, 255, 255, 0.84), rgba(233, 241, 255, 0.8));
+      border: 1px solid rgba(13, 23, 40, 0.06);
+      box-shadow: var(--shadow);
+    }
+
+    .showcase-card strong {
+      display: block;
+      font-family: "Sora", sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: -0.03em;
+      margin-bottom: 8px;
+    }
+
+    .showcase-card p {
+      margin: 0;
+      max-width: 28ch;
+      color: var(--muted);
+    }
+
+    .showcase-card::after {
+      content: "";
+      position: absolute;
+      inset: auto -20px -34px auto;
+      width: 140px;
+      height: 140px;
+      border-radius: 24px;
+      transform: rotate(18deg);
+      background: linear-gradient(135deg, rgba(31, 107, 255, 0.16), rgba(50, 215, 173, 0.18));
+    }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: end;
+      gap: 18px;
+      margin-bottom: 20px;
+    }
+
+    .section-head p,
+    .panel p,
+    .feature-card p,
+    .highlight p,
+    .cta-block p {
+      color: var(--muted);
+    }
+
+    .visual-grid,
+    .feature-grid,
+    .institution-grid,
+    .results-grid,
+    .contact-grid {
+      display: grid;
+      gap: 18px;
+    }
+
+    .visual-grid {
+      grid-template-columns: 1.06fr 0.94fr;
+    }
+
+    .feature-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .institution-grid {
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+    }
+
+    .results-grid,
+    .contact-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+
+    .panel,
+    .feature-card,
+    .highlight,
+    .cta-block {
+      padding: 24px;
+      border-radius: var(--radius-xl);
+    }
+
+    .feature-card {
+      padding-top: 18px;
+      overflow: hidden;
+    }
+
+    .illustration-frame {
+      border-radius: 22px;
+      padding: 14px;
+      background: linear-gradient(180deg, #f9fbff 0%, #ebf1ff 100%);
+      border: 1px solid rgba(13, 23, 40, 0.06);
+      margin-bottom: 16px;
+    }
+
+    .mini-stack {
+      display: grid;
+      gap: 12px;
+    }
+
+    .mini-stat {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.84);
+      border: 1px solid rgba(13, 23, 40, 0.06);
+    }
+
+    .mini-stat strong {
+      font-family: "Sora", sans-serif;
+      font-size: 1.4rem;
+      letter-spacing: -0.03em;
+    }
+
+    .kpis {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 16px;
+    }
+
+    .kpi {
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.68);
+      border: 1px solid rgba(13, 23, 40, 0.06);
+    }
+
+    .kpi strong {
+      display: block;
+      font-family: "Sora", sans-serif;
+      font-size: 1.8rem;
+      line-height: 1;
+      margin-bottom: 6px;
+    }
+
+    ul.clean {
+      list-style: none;
+      padding: 0;
+      margin: 18px 0 0;
+      display: grid;
+      gap: 12px;
+    }
+
+    ul.clean li {
+      display: flex;
+      gap: 10px;
+      align-items: flex-start;
+      color: var(--muted);
+    }
+
+    ul.clean li::before {
+      content: "";
+      width: 10px;
+      height: 10px;
+      margin-top: 7px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, var(--brand) 0%, #4dd7b0 100%);
+      flex: 0 0 auto;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .contact-item {
+      display: flex;
+      justify-content: space-between;
+      gap: 18px;
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(255, 255, 255, 0.76);
+      border: 1px solid rgba(13, 23, 40, 0.06);
+    }
+
+    .contact-item span {
+      color: var(--muted);
+    }
+
+    .footer {
+      padding: 26px 0 46px;
+    }
+
+    .footer-bar {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(13, 23, 40, 0.08);
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    .reveal-up {
+      opacity: 0;
+      transform: translateY(18px);
+      animation: revealUp 700ms ease forwards;
+    }
+
+    .delay-1 { animation-delay: 80ms; }
+    .delay-2 { animation-delay: 160ms; }
+    .delay-3 { animation-delay: 240ms; }
+    .delay-4 { animation-delay: 320ms; }
+
+    @keyframes revealUp {
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes floatCard {
+      0%, 100% {
+        transform: translateY(0px);
+      }
+      50% {
+        transform: translateY(-6px);
+      }
+    }
+
+    @media (max-width: 1080px) {
+      .hero-grid,
+      .visual-grid,
+      .results-grid,
+      .contact-grid,
+      .feature-grid,
+      .institution-grid,
+      .showcase-strip {
+        grid-template-columns: 1fr;
+      }
+
+      .nav-links {
+        display: none;
+      }
+    }
+
+    @media (max-width: 720px) {
+      .shell {
+        width: min(var(--max-width), calc(100% - 18px));
+      }
+
+      .hero-copy,
+      .hero-visual,
+      .panel,
+      .feature-card,
+      .highlight,
+      .cta-block {
+        padding: 20px;
+        border-radius: 24px;
+      }
+
+      .hero-meta,
+      .kpis {
+        grid-template-columns: 1fr;
+      }
+
+      .section-head,
+      .footer-bar,
+      .contact-item {
+        flex-direction: column;
+        align-items: start;
+      }
+
+      h1 {
+        font-size: 2.55rem;
+      }
+
+      .dashboard {
+        min-height: 340px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page-orb"></div>
+  <div class="page-orb-secondary"></div>
+  <header class="topbar">
+    <div class="shell nav">
+      <a class="brand" href="#top">
+        <div class="brand-badge">EG</div>
+        <div class="brand-copy">
+          EvalGpt
+          <span>AI evaluation platform by Arshniv Labs</span>
+        </div>
+      </a>
+      <nav class="nav-links">
+        <a href="#why">Why EvalGpt</a>
+        <a href="#features">Features</a>
+        <a href="#results">Reports</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <a class="button" href="#contact">Request Demo</a>
+    </div>
+  </header>
+
+  <main id="top">
+    <section class="hero">
+      <div class="shell hero-grid">
+        <div class="hero-copy reveal-up">
+          <div class="eyebrow">For Schools, Colleges, Universities</div>
+          <h1>Evaluate answer scripts faster with EvalGpt.</h1>
+          <p>
+            EvalGpt helps academic institutions assess student answer sheets using their own rubric,
+            faculty solution, and structured examiner-style logic. Reduce manual checking time,
+            improve marking consistency, and generate reports that leadership and faculty can use.
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="https://evalgpt.arshnivlabs.com">Visit EvalGpt</a>
+            <a class="button-alt" href="#features">Explore Features</a>
+          </div>
+          <div class="hero-proof">
+            <div class="hero-pill">Rubric-based marking</div>
+            <div class="hero-pill">OCR for scanned scripts</div>
+            <div class="hero-pill">Summary and PDF reports</div>
+          </div>
+          <div class="hero-meta">
+            <div class="meta-card">
+              <strong>Rubric-first</strong>
+              <span>Uses institution-defined criteria and faculty answers.</span>
+            </div>
+            <div class="meta-card">
+              <strong>OCR-ready</strong>
+              <span>Works with scanned PDF answer scripts and uploaded sheets.</span>
+            </div>
+            <div class="meta-card">
+              <strong>Report-driven</strong>
+              <span>Question-wise marks, totals, percentages, and detailed outputs.</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="hero-visual reveal-up delay-1">
+          <div class="domain-chip">Live domain: evalgpt.arshnivlabs.com</div>
+          <div class="dashboard">
+            <div class="floating-badge badge-top">AI evaluation in progress</div>
+            <div class="floating-badge badge-bottom">Summary + PDF reports ready</div>
+            <svg viewBox="0 0 620 440" aria-label="EvalGpt dashboard illustration" role="img">
+              <defs>
+                <linearGradient id="screen" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#ffffff" />
+                  <stop offset="100%" stop-color="#e7efff" />
+                </linearGradient>
+                <linearGradient id="chart" x1="0" y1="1" x2="1" y2="0">
+                  <stop offset="0%" stop-color="#2b7cff" />
+                  <stop offset="100%" stop-color="#32d7ad" />
+                </linearGradient>
+              </defs>
+              <rect x="150" y="62" width="340" height="238" rx="24" fill="url(#screen)" stroke="#d7e4ff" />
+              <rect x="178" y="92" width="132" height="18" rx="9" fill="#cfe0ff" />
+              <rect x="178" y="124" width="284" height="108" rx="18" fill="#f7faff" stroke="#d7e4ff" />
+              <path d="M204 210 L244 178 L292 192 L342 146 L398 164 L436 132" fill="none" stroke="url(#chart)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round" />
+              <circle cx="244" cy="178" r="7" fill="#2b7cff" />
+              <circle cx="342" cy="146" r="7" fill="#2b7cff" />
+              <circle cx="436" cy="132" r="7" fill="#32d7ad" />
+              <rect x="178" y="248" width="92" height="28" rx="14" fill="#d9fff0" />
+              <rect x="278" y="248" width="92" height="28" rx="14" fill="#ece2ff" />
+              <rect x="378" y="248" width="84" height="28" rx="14" fill="#ffe6a6" />
+              <rect x="102" y="132" width="112" height="160" rx="20" fill="#ffffff" stroke="#d8e4ff" transform="rotate(-8 102 132)" />
+              <rect x="118" y="160" width="78" height="12" rx="6" fill="#cfddff" transform="rotate(-8 118 160)" />
+              <rect x="118" y="185" width="66" height="10" rx="5" fill="#eaf1ff" transform="rotate(-8 118 185)" />
+              <rect x="118" y="208" width="72" height="10" rx="5" fill="#eaf1ff" transform="rotate(-8 118 208)" />
+              <rect x="118" y="231" width="52" height="10" rx="5" fill="#eaf1ff" transform="rotate(-8 118 231)" />
+              <circle cx="156" cy="268" r="18" fill="#d9fff0" />
+              <path d="M149 268 L154 273 L164 261" fill="none" stroke="#0c8b68" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+              <rect x="430" y="284" width="118" height="96" rx="24" fill="#ffffff" stroke="#d8e4ff" />
+              <rect x="452" y="306" width="72" height="12" rx="6" fill="#cfe0ff" />
+              <rect x="452" y="330" width="54" height="12" rx="6" fill="#d9fff0" />
+              <rect x="452" y="354" width="82" height="12" rx="6" fill="#ece2ff" />
+              <rect x="210" y="320" width="162" height="68" rx="24" fill="#0f254d" opacity="0.92" />
+              <text x="238" y="352" fill="#ffffff" font-family="Manrope, sans-serif" font-size="22" font-weight="800">89.4%</text>
+              <text x="238" y="376" fill="#c9dcff" font-family="Manrope, sans-serif" font-size="14" font-weight="700">batch consistency</text>
+            </svg>
+          </div>
+          <div class="mini-stack">
+            <div class="mini-stat">
+              <span>Institution-facing workflow</span>
+              <strong>Bulk upload</strong>
+            </div>
+            <div class="mini-stat">
+              <span>Output for faculty and management</span>
+              <strong>Summary + detailed reports</strong>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="shell showcase-strip reveal-up delay-2">
+        <div class="showcase-card">
+          <div class="micro">Academic Quality</div>
+          <strong>Standardize evaluation across faculty and batches.</strong>
+          <p>Use a single rubric logic to reduce variation in marking and make moderation easier.</p>
+        </div>
+        <div class="showcase-card">
+          <div class="micro">Leadership View</div>
+          <strong>Cleaner reporting.</strong>
+          <p>Give principals, HODs, and exam coordinators decision-ready results.</p>
+        </div>
+        <div class="showcase-card">
+          <div class="micro">Operational Gain</div>
+          <strong>Faster turnaround.</strong>
+          <p>Shorten result cycles without adding more manual review effort.</p>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="why">
+      <div class="shell visual-grid">
+        <article class="panel reveal-up">
+          <div class="eyebrow">Why EvalGpt</div>
+          <h2>Not another generic AI tool. A practical academic evaluation system.</h2>
+          <p>
+            EvalGpt is designed for real institutional exam operations. It helps faculty reduce repetitive manual checking while helping academic leadership improve standardization, transparency, and turnaround time.
+          </p>
+          <ul class="clean">
+            <li>Uses your rubric and faculty solution instead of loose answer matching.</li>
+            <li>Supports scanned answer sheets and paper-based workflows.</li>
+            <li>Generates structured results that can be reviewed, exported, and shared.</li>
+            <li>Fits schools, colleges, universities, coaching centers, and test-based institutes.</li>
+          </ul>
+          <div class="kpis">
+            <div class="kpi">
+              <strong>Faster</strong>
+              <span>result turnaround</span>
+            </div>
+            <div class="kpi">
+              <strong>Better</strong>
+              <span>marking consistency</span>
+            </div>
+            <div class="kpi">
+              <strong>Clearer</strong>
+              <span>reporting outputs</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="highlight reveal-up delay-1">
+          <div class="eyebrow">Visual Product Story</div>
+          <div class="illustration-frame">
+            <svg viewBox="0 0 640 420" aria-label="Answer script and report illustration" role="img">
+              <defs>
+                <linearGradient id="sheet" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0%" stop-color="#ffffff" />
+                  <stop offset="100%" stop-color="#eef4ff" />
+                </linearGradient>
+              </defs>
+              <rect x="48" y="66" width="210" height="284" rx="28" fill="url(#sheet)" stroke="#d8e4ff" />
+              <rect x="78" y="102" width="102" height="16" rx="8" fill="#cfe0ff" />
+              <rect x="78" y="136" width="150" height="10" rx="5" fill="#e6efff" />
+              <rect x="78" y="160" width="130" height="10" rx="5" fill="#e6efff" />
+              <rect x="78" y="184" width="144" height="10" rx="5" fill="#e6efff" />
+              <rect x="78" y="218" width="82" height="82" rx="18" fill="#d9fff0" />
+              <path d="M102 258 L118 274 L144 242" fill="none" stroke="#0a8b66" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+              <rect x="282" y="90" width="310" height="220" rx="30" fill="#0f254d" />
+              <rect x="312" y="122" width="102" height="14" rx="7" fill="#9dc0ff" />
+              <rect x="312" y="154" width="240" height="102" rx="22" fill="#142f61" stroke="#29467d" />
+              <rect x="332" y="226" width="24" height="14" rx="7" fill="#32d7ad" />
+              <rect x="368" y="204" width="24" height="36" rx="8" fill="#79a8ff" />
+              <rect x="404" y="186" width="24" height="54" rx="8" fill="#ffd978" />
+              <rect x="440" y="172" width="24" height="68" rx="8" fill="#32d7ad" />
+              <rect x="476" y="196" width="24" height="44" rx="8" fill="#ece2ff" />
+              <rect x="312" y="274" width="74" height="14" rx="7" fill="#274a8a" />
+              <rect x="394" y="274" width="86" height="14" rx="7" fill="#274a8a" />
+              <rect x="488" y="274" width="54" height="14" rx="7" fill="#274a8a" />
+              <circle cx="550" cy="74" r="38" fill="#ffffff" stroke="#d8e4ff" />
+              <text x="533" y="82" fill="#1f6bff" font-family="Manrope, sans-serif" font-size="24" font-weight="800">A+</text>
+            </svg>
+          </div>
+          <h3>From uploaded answer sheets to institutional reports.</h3>
+          <p>
+            The system reads answer scripts, maps them against rubric criteria, applies evaluation logic, and produces usable academic output instead of raw AI text.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="features">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Core Features</div>
+            <h2>Built to look like a product, not a brochure.</h2>
+          </div>
+          <p>
+            This page positions EvalGpt as a focused academic AI platform and removes the old training, cloud lab, and assessment lab messaging.
+          </p>
+        </div>
+
+        <div class="feature-grid">
+          <article class="feature-card reveal-up">
+            <div class="illustration-frame">
+              <svg viewBox="0 0 360 220" aria-label="Upload workflow illustration" role="img">
+                <rect x="28" y="40" width="112" height="140" rx="22" fill="#ffffff" stroke="#d8e4ff" />
+                <rect x="52" y="66" width="64" height="12" rx="6" fill="#cfe0ff" />
+                <rect x="52" y="92" width="78" height="10" rx="5" fill="#ebf2ff" />
+                <rect x="52" y="114" width="70" height="10" rx="5" fill="#ebf2ff" />
+                <rect x="52" y="136" width="84" height="10" rx="5" fill="#ebf2ff" />
+                <rect x="168" y="58" width="164" height="110" rx="26" fill="#0f254d" />
+                <rect x="190" y="86" width="118" height="12" rx="6" fill="#8eb8ff" />
+                <rect x="190" y="112" width="86" height="12" rx="6" fill="#32d7ad" />
+                <path d="M132 108 L164 108" stroke="#2b7cff" stroke-width="8" stroke-linecap="round" />
+                <path d="M150 90 L168 108 L150 126" fill="none" stroke="#2b7cff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+              </svg>
+            </div>
+            <div class="micro">01</div>
+            <h3>Upload rubric, faculty key, and student scripts</h3>
+            <p>Start with the inputs institutions already use in their existing exam process.</p>
+          </article>
+
+          <article class="feature-card reveal-up delay-1">
+            <div class="illustration-frame">
+              <svg viewBox="0 0 360 220" aria-label="AI evaluation illustration" role="img">
+                <rect x="36" y="40" width="288" height="146" rx="28" fill="#ffffff" stroke="#d8e4ff" />
+                <rect x="62" y="68" width="92" height="12" rx="6" fill="#cfe0ff" />
+                <rect x="62" y="96" width="236" height="52" rx="18" fill="#edf3ff" />
+                <path d="M92 132 L124 112 L154 122 L186 98 L214 110 L254 88" fill="none" stroke="#2b7cff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
+                <circle cx="254" cy="88" r="8" fill="#32d7ad" />
+                <circle cx="186" cy="98" r="7" fill="#2b7cff" />
+                <rect x="214" y="154" width="84" height="18" rx="9" fill="#d9fff0" />
+                <circle cx="108" cy="162" r="16" fill="#ece2ff" />
+                <text x="100" y="167" fill="#5d35c4" font-family="Manrope, sans-serif" font-size="12" font-weight="800">AI</text>
+              </svg>
+            </div>
+            <div class="micro">02</div>
+            <h3>Evaluate by rubric instead of guesswork</h3>
+            <p>EvalGpt applies structured logic so results stay closer to examiner expectations.</p>
+          </article>
+
+          <article class="feature-card reveal-up delay-2">
+            <div class="illustration-frame">
+              <svg viewBox="0 0 360 220" aria-label="Report output illustration" role="img">
+                <rect x="52" y="38" width="122" height="154" rx="24" fill="#ffffff" stroke="#d8e4ff" />
+                <rect x="78" y="68" width="70" height="12" rx="6" fill="#cfe0ff" />
+                <rect x="78" y="94" width="56" height="56" rx="16" fill="#d9fff0" />
+                <text x="97" y="128" fill="#0c8b68" font-family="Manrope, sans-serif" font-size="22" font-weight="800">92</text>
+                <rect x="196" y="58" width="112" height="120" rx="24" fill="#0f254d" />
+                <rect x="220" y="86" width="64" height="12" rx="6" fill="#8eb8ff" />
+                <rect x="220" y="114" width="48" height="44" rx="12" fill="#ffd978" />
+                <text x="230" y="142" fill="#6f4f00" font-family="Manrope, sans-serif" font-size="18" font-weight="800">PDF</text>
+              </svg>
+            </div>
+            <div class="micro">03</div>
+            <h3>Generate summary sheets and detailed reports</h3>
+            <p>Download outputs for faculty, students, management, and academic review teams.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="shell">
+        <div class="section-head">
+          <div>
+            <div class="eyebrow">Use Cases</div>
+            <h2>Who this page is speaking to.</h2>
+          </div>
+          <p>
+            This copy is tuned for institutions that buy on academic value, operational efficiency, and better assessment governance.
+          </p>
+        </div>
+
+        <div class="institution-grid">
+          <article class="panel reveal-up">
+            <div class="micro">Schools</div>
+            <h3>Internal exams and term assessments</h3>
+            <p>Help school teams reduce checking workload and publish results faster with more consistent marking.</p>
+          </article>
+          <article class="panel reveal-up delay-1">
+            <div class="micro">Colleges</div>
+            <h3>Departmental evaluation and moderation</h3>
+            <p>Standardize assessment across classes, faculty, and batches with clear, reviewable outputs.</p>
+          </article>
+          <article class="panel reveal-up delay-2">
+            <div class="micro">Universities and institutes</div>
+            <h3>Scaled academic evaluation workflows</h3>
+            <p>Support larger answer-script volumes without increasing manual review effort at the same pace.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="results">
+      <div class="shell results-grid">
+        <article class="highlight reveal-up">
+          <div class="eyebrow">Result Experience</div>
+          <h2>Decision-ready outputs, not just AI responses.</h2>
+          <p>
+            EvalGpt is useful because it creates structured academic outputs: question-wise marks, total score, percentage, ratings, and detailed student reports.
+          </p>
+          <ul class="clean">
+            <li>Question-wise scoring and final totals</li>
+            <li>Batch summary reports for administrators</li>
+            <li>Detailed PDFs for student-level review</li>
+            <li>Clearer visibility for principals, HODs, and exam coordinators</li>
+          </ul>
+        </article>
+
+        <article class="panel reveal-up delay-1">
+          <div class="illustration-frame">
+            <svg viewBox="0 0 560 320" aria-label="Result dashboard illustration" role="img">
+              <rect x="26" y="28" width="508" height="264" rx="30" fill="#ffffff" stroke="#d8e4ff" />
+              <rect x="52" y="56" width="118" height="14" rx="7" fill="#cfe0ff" />
+              <rect x="52" y="88" width="456" height="52" rx="18" fill="#f5f8ff" stroke="#e4ecff" />
+              <rect x="52" y="152" width="456" height="52" rx="18" fill="#f5f8ff" stroke="#e4ecff" />
+              <rect x="52" y="216" width="456" height="52" rx="18" fill="#f5f8ff" stroke="#e4ecff" />
+              <rect x="78" y="108" width="52" height="14" rx="7" fill="#d9fff0" />
+              <rect x="154" y="108" width="84" height="14" rx="7" fill="#ebf2ff" />
+              <rect x="334" y="100" width="88" height="28" rx="14" fill="#0f254d" />
+              <text x="360" y="119" fill="#ffffff" font-family="Manrope, sans-serif" font-size="14" font-weight="800">92/100</text>
+              <rect x="78" y="172" width="52" height="14" rx="7" fill="#ece2ff" />
+              <rect x="154" y="172" width="114" height="14" rx="7" fill="#ebf2ff" />
+              <rect x="334" y="164" width="88" height="28" rx="14" fill="#1f6bff" />
+              <text x="360" y="183" fill="#ffffff" font-family="Manrope, sans-serif" font-size="14" font-weight="800">86/100</text>
+              <rect x="78" y="236" width="52" height="14" rx="7" fill="#ffe6a6" />
+              <rect x="154" y="236" width="96" height="14" rx="7" fill="#ebf2ff" />
+              <rect x="334" y="228" width="88" height="28" rx="14" fill="#32d7ad" />
+              <text x="360" y="247" fill="#083d31" font-family="Manrope, sans-serif" font-size="14" font-weight="800">89/100</text>
+            </svg>
+          </div>
+          <h3>Academic reporting that looks organized and trustworthy.</h3>
+          <p>
+            This is the message your page should communicate: EvalGpt is a serious institutional product, not a side experiment.
+          </p>
+        </article>
+      </div>
+    </section>
+
+    <section class="section" id="contact">
+      <div class="shell contact-grid">
+        <article class="cta-block reveal-up">
+          <div class="eyebrow">Deployment</div>
+          <h2>Hosted for your brand on AWS.</h2>
+          <p>
+            The page now positions the product around the EvalGpt brand and the live URL you mentioned. Replace the placeholders below with your real business contact details before publishing.
+          </p>
+          <div class="contact-list">
+            <div class="contact-item">
+              <strong>Domain</strong>
+              <span>evalgpt.arshnivlabs.com</span>
+            </div>
+            <div class="contact-item">
+              <strong>Company</strong>
+              <span>Arshniv Labs / Arshniv Technologies</span>
+            </div>
+            <div class="contact-item">
+              <strong>Email</strong>
+              <span>hello@arshnivlabs.com</span>
+            </div>
+            <div class="contact-item">
+              <strong>WhatsApp</strong>
+              <span>+91-XXXXXXXXXX</span>
+            </div>
+          </div>
+        </article>
+
+        <article class="panel reveal-up delay-1">
+          <div class="eyebrow">Call to action</div>
+          <h3>Position it like this in meetings and outreach.</h3>
+          <p>
+            EvalGpt helps institutions evaluate answer scripts faster using their own rubric and faculty solution, with better consistency and cleaner reporting.
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="https://evalgpt.arshnivlabs.com">Open EvalGpt</a>
+            <a class="button-alt" href="mailto:hello@arshnivlabs.com">Email for Demo</a>
+          </div>
+          <ul class="clean">
+            <li>Less faculty time spent on repetitive manual checking</li>
+            <li>More standardized evaluation across batches and reviewers</li>
+            <li>Faster academic turnaround without losing institutional control</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="shell footer-bar">
+      <span>© 2026 Arshniv Labs. All rights reserved.</span>
+      <span>EvalGpt for answer script evaluation and academic reporting.</span>
+    </div>
+  </footer>
+</body>
+</html>
