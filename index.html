@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>EvalGpt | AI Answer Script Evaluation for Schools and Colleges</title>
+  <title>EvalGpt | AI Answer Script Evaluation for Corporates,Colleges and Schools</title>
   <meta
     name="description"
     content="EvalGpt helps schools, colleges, and academic institutions evaluate answer scripts faster with rubric-based AI scoring, OCR, and report generation."
@@ -133,11 +133,16 @@
       border-radius: 16px;
       display: grid;
       place-items: center;
-      font-family: "Sora", sans-serif;
-      font-weight: 800;
-      color: #fff;
-      background: linear-gradient(135deg, #2b7cff 0%, #1b49c7 100%);
+      overflow: hidden;
+      background: #ffffff;
       box-shadow: 0 16px 32px rgba(31, 107, 255, 0.26);
+    }
+
+    .brand-badge img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
     }
 
     .brand-copy {
@@ -499,6 +504,64 @@
       margin-bottom: 16px;
     }
 
+    .product-shot {
+      position: relative;
+      margin: 0;
+      border-radius: 16px;
+      overflow: hidden;
+      aspect-ratio: 16 / 10;
+      border: 1px solid rgba(13, 23, 40, 0.08);
+      box-shadow: 0 12px 30px rgba(23, 56, 128, 0.14);
+      background: #f4f8ff;
+      isolation: isolate;
+    }
+
+    .product-shot::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(13, 23, 40, 0) 58%, rgba(13, 23, 40, 0.18) 100%);
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    .product-shot::after {
+      content: attr(data-label);
+      position: absolute;
+      left: 12px;
+      bottom: 12px;
+      z-index: 2;
+      padding: 6px 10px;
+      border-radius: 999px;
+      font-size: 0.74rem;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: #ffffff;
+      background: rgba(13, 23, 40, 0.62);
+      border: 1px solid rgba(255, 255, 255, 0.18);
+    }
+
+    .product-shot img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transform: scale(1.05);
+      filter: saturate(1.05) contrast(1.02);
+    }
+
+    .product-shot-upload img {
+      object-position: 50% 38%;
+    }
+
+    .product-shot-evaluate img {
+      object-position: 56% 40%;
+    }
+
+    .product-shot-report img {
+      object-position: 54% 72%;
+    }
+
     .mini-stack {
       display: grid;
       gap: 12px;
@@ -688,10 +751,12 @@
   <header class="topbar">
     <div class="shell nav">
       <a class="brand" href="#top">
-        <div class="brand-badge">EG</div>
+        <div class="brand-badge">
+          <img src="ARSHNIV.PNG" alt="Arshniv logo" />
+        </div>
         <div class="brand-copy">
           EvalGpt
-          <span>AI evaluation platform by Arshniv Labs</span>
+          <span>AI evaluation platform by Arshniv Technologies</span>
         </div>
       </a>
       <nav class="nav-links">
@@ -708,7 +773,7 @@
     <section class="hero">
       <div class="shell hero-grid">
         <div class="hero-copy reveal-up">
-          <div class="eyebrow">For Corporates, Hiring Teams, and Training Organizations</div>
+          <div class="eyebrow">For Corporates, Hiring Teams, Training Organizations, Colleges and Schools</div>
           <h1>Evaluate answer scripts faster with EvalGpt.</h1>
           <p>
             EvalGpt helps academic institutions assess student answer sheets using their own rubric,
@@ -888,28 +953,15 @@
         <div class="section-head">
           <div>
             <div class="eyebrow">Core Features</div>
-            <h2>Built to look like a product, not a brochure.</h2>
           </div>
-          <p>
-            This page positions EvalGpt as a focused academic AI platform and removes the old training, cloud lab, and assessment lab messaging.
-          </p>
         </div>
 
         <div class="feature-grid">
           <article class="feature-card reveal-up">
             <div class="illustration-frame">
-              <svg viewBox="0 0 360 220" aria-label="Upload workflow illustration" role="img">
-                <rect x="28" y="40" width="112" height="140" rx="22" fill="#ffffff" stroke="#d8e4ff" />
-                <rect x="52" y="66" width="64" height="12" rx="6" fill="#cfe0ff" />
-                <rect x="52" y="92" width="78" height="10" rx="5" fill="#ebf2ff" />
-                <rect x="52" y="114" width="70" height="10" rx="5" fill="#ebf2ff" />
-                <rect x="52" y="136" width="84" height="10" rx="5" fill="#ebf2ff" />
-                <rect x="168" y="58" width="164" height="110" rx="26" fill="#0f254d" />
-                <rect x="190" y="86" width="118" height="12" rx="6" fill="#8eb8ff" />
-                <rect x="190" y="112" width="86" height="12" rx="6" fill="#32d7ad" />
-                <path d="M132 108 L164 108" stroke="#2b7cff" stroke-width="8" stroke-linecap="round" />
-                <path d="M150 90 L168 108 L150 126" fill="none" stroke="#2b7cff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
-              </svg>
+              <figure class="product-shot product-shot-upload" data-label="Step 1: Upload files">
+                <img src="upload files.png" alt="EvalGpt upload files screenshot" loading="lazy" />
+              </figure>
             </div>
             <div class="micro">01</div>
             <h3>Upload rubric, faculty key, and student scripts</h3>
@@ -918,17 +970,9 @@
 
           <article class="feature-card reveal-up delay-1">
             <div class="illustration-frame">
-              <svg viewBox="0 0 360 220" aria-label="AI evaluation illustration" role="img">
-                <rect x="36" y="40" width="288" height="146" rx="28" fill="#ffffff" stroke="#d8e4ff" />
-                <rect x="62" y="68" width="92" height="12" rx="6" fill="#cfe0ff" />
-                <rect x="62" y="96" width="236" height="52" rx="18" fill="#edf3ff" />
-                <path d="M92 132 L124 112 L154 122 L186 98 L214 110 L254 88" fill="none" stroke="#2b7cff" stroke-width="8" stroke-linecap="round" stroke-linejoin="round" />
-                <circle cx="254" cy="88" r="8" fill="#32d7ad" />
-                <circle cx="186" cy="98" r="7" fill="#2b7cff" />
-                <rect x="214" y="154" width="84" height="18" rx="9" fill="#d9fff0" />
-                <circle cx="108" cy="162" r="16" fill="#ece2ff" />
-                <text x="100" y="167" fill="#5d35c4" font-family="Manrope, sans-serif" font-size="12" font-weight="800">AI</text>
-              </svg>
+              <figure class="product-shot product-shot-evaluate" data-label="Step 2: AI evaluation">
+                <img src="Evaluate.png" alt="EvalGpt evaluation summary screenshot" loading="lazy" />
+              </figure>
             </div>
             <div class="micro">02</div>
             <h3>Evaluate by rubric instead of guesswork</h3>
@@ -937,16 +981,9 @@
 
           <article class="feature-card reveal-up delay-2">
             <div class="illustration-frame">
-              <svg viewBox="0 0 360 220" aria-label="Report output illustration" role="img">
-                <rect x="52" y="38" width="122" height="154" rx="24" fill="#ffffff" stroke="#d8e4ff" />
-                <rect x="78" y="68" width="70" height="12" rx="6" fill="#cfe0ff" />
-                <rect x="78" y="94" width="56" height="56" rx="16" fill="#d9fff0" />
-                <text x="97" y="128" fill="#0c8b68" font-family="Manrope, sans-serif" font-size="22" font-weight="800">92</text>
-                <rect x="196" y="58" width="112" height="120" rx="24" fill="#0f254d" />
-                <rect x="220" y="86" width="64" height="12" rx="6" fill="#8eb8ff" />
-                <rect x="220" y="114" width="48" height="44" rx="12" fill="#ffd978" />
-                <text x="230" y="142" fill="#6f4f00" font-family="Manrope, sans-serif" font-size="18" font-weight="800">PDF</text>
-              </svg>
+              <figure class="product-shot product-shot-report" data-label="Step 3: Summary + reports">
+                <img src="summary.png" alt="EvalGpt summary and detailed report screenshot" loading="lazy" />
+              </figure>
             </div>
             <div class="micro">03</div>
             <h3>Generate summary sheets and detailed reports</h3>
@@ -1016,29 +1053,13 @@
 
         <article class="panel reveal-up delay-1">
           <div class="illustration-frame">
-            <svg viewBox="0 0 560 320" aria-label="Result dashboard illustration" role="img">
-              <rect x="26" y="28" width="508" height="264" rx="30" fill="#ffffff" stroke="#d8e4ff" />
-              <rect x="52" y="56" width="118" height="14" rx="7" fill="#cfe0ff" />
-              <rect x="52" y="88" width="456" height="52" rx="18" fill="#f5f8ff" stroke="#e4ecff" />
-              <rect x="52" y="152" width="456" height="52" rx="18" fill="#f5f8ff" stroke="#e4ecff" />
-              <rect x="52" y="216" width="456" height="52" rx="18" fill="#f5f8ff" stroke="#e4ecff" />
-              <rect x="78" y="108" width="52" height="14" rx="7" fill="#d9fff0" />
-              <rect x="154" y="108" width="84" height="14" rx="7" fill="#ebf2ff" />
-              <rect x="334" y="100" width="88" height="28" rx="14" fill="#0f254d" />
-              <text x="360" y="119" fill="#ffffff" font-family="Manrope, sans-serif" font-size="14" font-weight="800">92/100</text>
-              <rect x="78" y="172" width="52" height="14" rx="7" fill="#ece2ff" />
-              <rect x="154" y="172" width="114" height="14" rx="7" fill="#ebf2ff" />
-              <rect x="334" y="164" width="88" height="28" rx="14" fill="#1f6bff" />
-              <text x="360" y="183" fill="#ffffff" font-family="Manrope, sans-serif" font-size="14" font-weight="800">86/100</text>
-              <rect x="78" y="236" width="52" height="14" rx="7" fill="#ffe6a6" />
-              <rect x="154" y="236" width="96" height="14" rx="7" fill="#ebf2ff" />
-              <rect x="334" y="228" width="88" height="28" rx="14" fill="#32d7ad" />
-              <text x="360" y="247" fill="#083d31" font-family="Manrope, sans-serif" font-size="14" font-weight="800">89/100</text>
-            </svg>
+            <figure class="product-shot product-shot-report" data-label="Summary and detailed report">
+              <img src="Evaluate.png" alt="EvalGpt student result and report screenshot" loading="lazy" />
+            </figure>
           </div>
           <h3>Academic reporting that looks organized and trustworthy.</h3>
           <p>
-            This is the message your page should communicate: EvalGpt is a serious institutional product, not a side experiment.
+            Give faculty and leadership a clean student-wise report with totals, percentages, status, and downloadable PDFs.
           </p>
         </article>
       </div>
@@ -1050,7 +1071,7 @@
           <div class="eyebrow">Deployment</div>
           <h2>Hosted for your brand on AWS.</h2>
           <p>
-            The page now positions the product around the EvalGpt brand and the live URL you mentioned. Replace the placeholders below with your real business contact details before publishing.
+            Deploy EvalGpt on your branded domain with secure access, institution controls, and role-based reporting.
           </p>
           <div class="contact-list">
             <div class="contact-item">
@@ -1074,7 +1095,7 @@
 
         <article class="panel reveal-up delay-1">
           <div class="eyebrow">Call to action</div>
-          <h3>Position it like this in meetings and outreach.</h3>
+          <h3>Start your EvalGpt deployment with your team.</h3>
           <p>
             EvalGpt helps institutions evaluate answer scripts faster using their own rubric and faculty solution, with better consistency and cleaner reporting.
           </p>
