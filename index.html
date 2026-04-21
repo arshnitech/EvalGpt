@@ -303,12 +303,17 @@
       font-weight: 700;
     }
 
-    .hero-pill::before {
-      content: "";
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, var(--brand) 0%, #32d7ad 100%);
+    .pill-icon {
+      width: 20px;
+      height: 20px;
+      border-radius: 7px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.78rem;
+      background: linear-gradient(145deg, rgba(31, 107, 255, 0.16), rgba(50, 215, 173, 0.2));
+      border: 1px solid rgba(31, 107, 255, 0.18);
+      flex: 0 0 auto;
     }
 
     .hero-meta {
@@ -329,6 +334,26 @@
       display: block;
       margin-bottom: 4px;
       font-size: 1rem;
+    }
+
+    .meta-top {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 2px;
+    }
+
+    .meta-icon {
+      width: 24px;
+      height: 24px;
+      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.84rem;
+      background: rgba(31, 107, 255, 0.14);
+      border: 1px solid rgba(31, 107, 255, 0.16);
+      flex: 0 0 auto;
     }
 
     .meta-card span {
@@ -460,6 +485,19 @@
       box-shadow: var(--shadow);
     }
 
+    .card-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      margin-bottom: 12px;
+      font-size: 1.1rem;
+      background: linear-gradient(145deg, rgba(31, 107, 255, 0.14), rgba(50, 215, 173, 0.2));
+      border: 1px solid rgba(31, 107, 255, 0.16);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.7);
+    }
+
     .showcase-card strong {
       display: block;
       font-family: "Sora", sans-serif;
@@ -522,6 +560,93 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
     }
 
+    .audience-wrap {
+      position: relative;
+      overflow: hidden;
+      padding: 28px;
+      border-radius: 34px;
+      border: 1px solid rgba(13, 23, 40, 0.08);
+      background:
+        radial-gradient(circle at 8% 0%, rgba(31, 107, 255, 0.18), transparent 28%),
+        radial-gradient(circle at 92% 16%, rgba(34, 201, 153, 0.16), transparent 24%),
+        linear-gradient(180deg, rgba(255, 255, 255, 0.9), rgba(237, 244, 255, 0.86));
+      box-shadow: 0 24px 56px rgba(31, 57, 122, 0.14);
+      isolation: isolate;
+    }
+
+    .audience-wrap::after {
+      content: "";
+      position: absolute;
+      right: -90px;
+      bottom: -130px;
+      width: 330px;
+      height: 250px;
+      border-radius: 28px;
+      background: url("Dashboard.png") center/cover no-repeat;
+      filter: blur(2px) saturate(1.04);
+      opacity: 0.16;
+      transform: rotate(-7deg);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .audience-wrap .section-head {
+      align-items: flex-start;
+      margin-bottom: 22px;
+    }
+
+    .audience-note {
+      max-width: 42ch;
+      margin: 6px 0 0;
+      color: var(--muted);
+    }
+
+    .audience-card {
+      position: relative;
+      overflow: hidden;
+      transition: transform 180ms ease, box-shadow 220ms ease, border-color 220ms ease;
+    }
+
+    .audience-card::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(140deg, rgba(31, 107, 255, 0.06), transparent 46%);
+      pointer-events: none;
+    }
+
+    .audience-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 22px 48px rgba(24, 67, 160, 0.2);
+      border-color: rgba(31, 107, 255, 0.24);
+    }
+
+    .audience-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+
+    .audience-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 12px;
+      display: grid;
+      place-items: center;
+      font-size: 1.1rem;
+      background: linear-gradient(145deg, rgba(31, 107, 255, 0.14), rgba(50, 215, 173, 0.2));
+      border: 1px solid rgba(31, 107, 255, 0.16);
+      box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.6);
+    }
+
+    .audience-card h3 {
+      margin-top: 2px;
+      margin-bottom: 8px;
+      line-height: 1.08;
+    }
+
     .results-grid,
     .contact-grid {
       grid-template-columns: 1fr 1fr;
@@ -538,6 +663,25 @@
     .feature-card {
       padding-top: 18px;
       overflow: hidden;
+    }
+
+    .feature-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+
+    .feature-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: 10px;
+      display: grid;
+      place-items: center;
+      font-size: 1rem;
+      background: linear-gradient(145deg, rgba(31, 107, 255, 0.14), rgba(50, 215, 173, 0.2));
+      border: 1px solid rgba(31, 107, 255, 0.16);
     }
 
     .illustration-frame {
@@ -670,6 +814,19 @@
       border: 1px solid rgba(13, 23, 40, 0.06);
     }
 
+    .kpi-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 30px;
+      height: 30px;
+      border-radius: 9px;
+      margin-bottom: 8px;
+      font-size: 0.94rem;
+      background: rgba(31, 107, 255, 0.14);
+      border: 1px solid rgba(31, 107, 255, 0.16);
+    }
+
     .kpi strong {
       display: block;
       font-family: "Sora", sans-serif;
@@ -717,6 +874,12 @@
       border-radius: 18px;
       background: rgba(255, 255, 255, 0.76);
       border: 1px solid rgba(13, 23, 40, 0.06);
+    }
+
+    .contact-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
     }
 
     .contact-item span {
@@ -807,6 +970,23 @@
         align-items: start;
       }
 
+      .audience-wrap {
+        padding: 18px;
+        border-radius: 24px;
+      }
+
+      .audience-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 11px;
+      }
+
+      .card-icon {
+        width: 34px;
+        height: 34px;
+        border-radius: 11px;
+      }
+
       h1 {
         font-size: 2.55rem;
       }
@@ -877,25 +1057,34 @@
             improve marking consistency, and generate reports that leadership and faculty can use.
           </p>
           <div class="hero-actions">
-            <a class="button" href="https://evalgpt.arshnivlabs.com">Visit EvalGpt</a>
+            <a class="button" href="#contact">Request Demo</a>
             <a class="button-alt" href="#features">Explore Features</a>
           </div>
           <div class="hero-proof">
-            <div class="hero-pill">Rubric-based marking</div>
-            <div class="hero-pill">OCR for scanned scripts</div>
-            <div class="hero-pill">Summary and PDF reports</div>
+            <div class="hero-pill"><span class="pill-icon" aria-hidden="true">📐</span>Rubric-based marking</div>
+            <div class="hero-pill"><span class="pill-icon" aria-hidden="true">🔎</span>OCR for scanned scripts</div>
+            <div class="hero-pill"><span class="pill-icon" aria-hidden="true">🧾</span>Summary and PDF reports</div>
           </div>
           <div class="hero-meta">
             <div class="meta-card">
-              <strong>Rubric-first</strong>
+              <div class="meta-top">
+                <span class="meta-icon" aria-hidden="true">📚</span>
+                <strong>Rubric-first</strong>
+              </div>
               <span>Uses institution-defined criteria and faculty answers.</span>
             </div>
             <div class="meta-card">
-              <strong>OCR-ready</strong>
+              <div class="meta-top">
+                <span class="meta-icon" aria-hidden="true">📄</span>
+                <strong>OCR-ready</strong>
+              </div>
               <span>Works with scanned PDF answer scripts and uploaded sheets.</span>
             </div>
             <div class="meta-card">
-              <strong>Report-driven</strong>
+              <div class="meta-top">
+                <span class="meta-icon" aria-hidden="true">📊</span>
+                <strong>Report-driven</strong>
+              </div>
               <span>Question-wise marks, totals, percentages, and detailed outputs.</span>
             </div>
           </div>
@@ -938,16 +1127,19 @@
       </div>
       <div class="shell showcase-strip reveal-up delay-2">
         <div class="showcase-card">
+          <div class="card-icon" aria-hidden="true">📊</div>
           <div class="micro">Academic Quality</div>
           <strong>Standardize evaluation across faculty and batches.</strong>
           <p>Use a single rubric logic to reduce variation in marking and make moderation easier.</p>
         </div>
         <div class="showcase-card">
+          <div class="card-icon" aria-hidden="true">🧭</div>
           <div class="micro">Leadership View</div>
           <strong>Cleaner reporting.</strong>
           <p>Give principals, HODs, and exam coordinators decision-ready results.</p>
         </div>
         <div class="showcase-card">
+          <div class="card-icon" aria-hidden="true">⚡</div>
           <div class="micro">Operational Gain</div>
           <strong>Faster turnaround.</strong>
           <p>Shorten result cycles without adding more manual review effort.</p>
@@ -971,14 +1163,17 @@
           </ul>
           <div class="kpis">
             <div class="kpi">
+              <span class="kpi-icon" aria-hidden="true">⏱️</span>
               <strong>Faster</strong>
               <span>result turnaround</span>
             </div>
             <div class="kpi">
+              <span class="kpi-icon" aria-hidden="true">🎯</span>
               <strong>Better</strong>
               <span>marking consistency</span>
             </div>
             <div class="kpi">
+              <span class="kpi-icon" aria-hidden="true">📁</span>
               <strong>Clearer</strong>
               <span>reporting outputs</span>
             </div>
@@ -1015,7 +1210,10 @@
                 <img src="upload files.png" alt="EvalGpt upload files screenshot" loading="lazy" />
               </figure>
             </div>
-            <div class="micro">01</div>
+            <div class="feature-meta">
+              <div class="micro">01</div>
+              <span class="feature-icon" aria-hidden="true">📤</span>
+            </div>
             <h3>Upload rubric, faculty key, and student scripts</h3>
             <p>Start with the inputs institutions already use in their existing exam process.</p>
           </article>
@@ -1026,7 +1224,10 @@
                 <img src="Evaluate.png" alt="EvalGpt evaluation summary screenshot" loading="lazy" />
               </figure>
             </div>
-            <div class="micro">02</div>
+            <div class="feature-meta">
+              <div class="micro">02</div>
+              <span class="feature-icon" aria-hidden="true">🧠</span>
+            </div>
             <h3>Evaluate by rubric instead of guesswork</h3>
             <p>EvalGpt applies structured logic so results stay closer to examiner expectations.</p>
           </article>
@@ -1037,7 +1238,10 @@
                 <img src="summary.png" alt="EvalGpt summary and detailed report screenshot" loading="lazy" />
               </figure>
             </div>
-            <div class="micro">03</div>
+            <div class="feature-meta">
+              <div class="micro">03</div>
+              <span class="feature-icon" aria-hidden="true">🧾</span>
+            </div>
             <h3>Generate summary sheets and detailed reports</h3>
             <p>Download outputs for faculty, students, management, and academic review teams.</p>
           </article>
@@ -1047,40 +1251,60 @@
 
     <section class="section" id="audience">
       <div class="shell">
-        <div class="section-head">
-          <div>
-            <div class="eyebrow">Audience Priority</div>
-            <h2>Who EvalGpt serves first.</h2>
+        <div class="audience-wrap reveal-up">
+          <div class="section-head">
+            <div>
+              <div class="eyebrow">Who It Is For</div>
+              <h2>Designed for modern evaluation teams.</h2>
+            </div>
+            <p class="audience-note">
+              Choose your workflow and deploy rubric-based assessment for hiring, training, schools, and higher education.
+            </p>
           </div>
-          
         </div>
 
-        <div class="institution-grid">
-          <article class="panel reveal-up">
-            <div class="micro">Corporates</div>
-            <h3>Enterprise assessment operations</h3>
-            <p>Evaluate employee assessments and track performance across teams with consistent scoring.</p>
-          </article>
-          <article class="panel reveal-up delay-1">
-            <div class="micro">Hiring / Recruitment</div>
-            <h3>Candidate screening at scale</h3>
-            <p>Evaluate candidate written tests and screen at scale with structured, reviewable outputs.</p>
-          </article>
-          <article class="panel reveal-up delay-2">
-            <div class="micro">Training Teams (L&amp;D)</div>
-            <h3>Learning assessment workflows</h3>
-            <p>Evaluate assignments and support certification programs with reliable rubric-based scoring.</p>
-          </article>
-          <article class="panel reveal-up delay-3">
-            <div class="micro">Colleges &amp; Universities</div>
-            <h3>Department-level academic evaluation</h3>
-            <p>Run department-level evaluation and internal exams with faster moderation and clearer reports.</p>
-          </article>
-          <article class="panel reveal-up delay-4">
-            <div class="micro">Schools</div>
-            <h3>Term-exam correction support</h3>
-            <p>Handle term exams with faster correction while maintaining consistent marking standards.</p>
-          </article>
+          <div class="institution-grid">
+            <article class="panel reveal-up audience-card">
+              <div class="audience-meta">
+                <div class="micro">Corporates</div>
+                <span class="audience-icon" aria-hidden="true">🏢</span>
+              </div>
+              <h3>Enterprise assessment operations</h3>
+              <p>Evaluate employee assessments and track performance across teams with consistent scoring.</p>
+            </article>
+            <article class="panel reveal-up delay-1 audience-card">
+              <div class="audience-meta">
+                <div class="micro">Hiring / Recruitment</div>
+                <span class="audience-icon" aria-hidden="true">🧑‍💼</span>
+              </div>
+              <h3>Candidate screening at scale</h3>
+              <p>Evaluate candidate written tests and screen at scale with structured, reviewable outputs.</p>
+            </article>
+            <article class="panel reveal-up delay-2 audience-card">
+              <div class="audience-meta">
+                <div class="micro">Training Teams (L&amp;D)</div>
+                <span class="audience-icon" aria-hidden="true">📘</span>
+              </div>
+              <h3>Learning assessment workflows</h3>
+              <p>Evaluate assignments and support certification programs with reliable rubric-based scoring.</p>
+            </article>
+            <article class="panel reveal-up delay-3 audience-card">
+              <div class="audience-meta">
+                <div class="micro">Colleges &amp; Universities</div>
+                <span class="audience-icon" aria-hidden="true">🎓</span>
+              </div>
+              <h3>Department-level academic evaluation</h3>
+              <p>Run department-level evaluation and internal exams with faster moderation and clearer reports.</p>
+            </article>
+            <article class="panel reveal-up delay-4 audience-card">
+              <div class="audience-meta">
+                <div class="micro">Schools</div>
+                <span class="audience-icon" aria-hidden="true">🏫</span>
+              </div>
+              <h3>Term-exam correction support</h3>
+              <p>Handle term exams with faster correction while maintaining consistent marking standards.</p>
+            </article>
+          </div>
         </div>
       </div>
     </section>
@@ -1126,15 +1350,15 @@
           </p>
           <div class="contact-list">
             <div class="contact-item">
-              <strong>Company</strong>
+              <strong class="contact-label"><span aria-hidden="true">🏢</span>Company</strong>
               <span>Arshniv Technologies</span>
             </div>
             <div class="contact-item">
-              <strong>Email</strong>
+              <strong class="contact-label"><span aria-hidden="true">✉️</span>Email</strong>
               <span>info@arshnivtechnologies.com</span>
             </div>
             <div class="contact-item">
-              <strong>WhatsApp</strong>
+              <strong class="contact-label"><span aria-hidden="true">💬</span>WhatsApp</strong>
               <span>+91-XXXXXXXXXX</span>
             </div>
           </div>
@@ -1147,7 +1371,7 @@
             EvalGpt helps institutions evaluate answer scripts faster using their own rubric and faculty solution, with better consistency and cleaner reporting.
           </p>
           <div class="hero-actions">
-            <a class="button" href="https://evalgpt.arshnivlabs.com">Open EvalGpt</a>
+            <a class="button" href="#contact">Request Demo</a>
             <a class="button-alt" href="mailto:hello@arshnivlabs.com">Email for Demo</a>
           </div>
           <ul class="clean">
